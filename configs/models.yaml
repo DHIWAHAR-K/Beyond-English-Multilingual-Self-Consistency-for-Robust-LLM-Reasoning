@@ -1,0 +1,156 @@
+models:
+
+  qwen2_5_32b:
+    name: Qwen2.5-32B-Instruct
+    family: Qwen2.5
+    organization: Alibaba
+    hf_id: Qwen/Qwen2.5-32B-Instruct
+    mlx_id: mlx-community/Qwen2.5-32B-Instruct-4bit
+    parameters: 32B
+    quantization: 4bit
+    estimated_ram_gb: 20
+    estimated_speed_tok_per_sec: "20-23"
+    languages: 29
+    is_reasoning_model: false
+    requires_conversion: false
+    role: Primary workhorse — broadest language coverage in size class
+
+  aya_expanse_32b:
+    name: Aya Expanse 32B
+    family: Aya Expanse
+    organization: Cohere Labs
+    hf_id: CohereForAI/aya-expanse-32b
+    mlx_id: bartowski/aya-expanse-32b-GGUF
+    parameters: 32B
+    quantization: 4bit
+    estimated_ram_gb: 20
+    estimated_speed_tok_per_sec: "20-23"
+    languages: 23
+    is_reasoning_model: false
+    requires_conversion: true
+    role: Purpose-built multilingual specialist model
+
+  llama3_1_70b:
+    name: Meta-Llama-3.1-70B-Instruct
+    family: LLaMA 3.1
+    organization: Meta AI
+    hf_id: meta-llama/Meta-Llama-3.1-70B-Instruct
+    mlx_id: mlx-community/Meta-Llama-3.1-70B-Instruct-4bit
+    parameters: 70B
+    quantization: 4bit
+    estimated_ram_gb: 42
+    estimated_speed_tok_per_sec: "8-10"
+    languages: 8
+    is_reasoning_model: false
+    requires_conversion: false
+    role: Scale validation — selective runs on key benchmarks only
+
+  mistral_small_24b:
+    name: Mistral-Small-24B-Instruct-2501
+    family: Mistral Small
+    organization: Mistral AI
+    hf_id: mistralai/Mistral-Small-24B-Instruct-2501
+    mlx_id: mlx-community/Mistral-Small-24B-Instruct-2501-4bit
+    parameters: 24B
+    quantization: 4bit
+    estimated_ram_gb: 14
+    estimated_speed_tok_per_sec: "28-32"
+    languages: 12
+    is_reasoning_model: false
+    requires_conversion: false
+    role: Efficient mid-size model with strong European language coverage
+
+  gemma3_27b:
+    name: Gemma-3-27B-Instruct
+    family: Gemma 3
+    organization: Google DeepMind
+    hf_id: google/gemma-3-27b-it
+    mlx_id: mlx-community/gemma-3-27b-it-4bit
+    parameters: 27B
+    quantization: 4bit
+    estimated_ram_gb: 17
+    estimated_speed_tok_per_sec: "22-25"
+    languages: 140
+    is_reasoning_model: false
+    requires_conversion: false
+    role: Google architecture with 262K-vocab tokenizer and 140+ language pretrain
+
+  phi4_14b:
+    name: Phi-4
+    family: Phi-4
+    organization: Microsoft
+    hf_id: microsoft/phi-4
+    mlx_id: mlx-community/phi-4-4bit
+    parameters: 14B
+    quantization: 4bit
+    estimated_ram_gb: 8
+    estimated_speed_tok_per_sec: "38-42"
+    languages: 23
+    is_reasoning_model: false
+    requires_conversion: false
+    reasoning_siblings_to_avoid: ["microsoft/Phi-4-reasoning", "microsoft/Phi-4-reasoning-plus"]
+    role: High-efficiency reasoning benchmark — not a reasoning model
+
+  deepseek_v3:
+    name: DeepSeek-V3
+    family: DeepSeek-V3
+    organization: DeepSeek AI
+    hf_id: deepseek-ai/DeepSeek-V3
+    mlx_id: mlx-community/DeepSeek-V3-4bit
+    parameters: 671B
+    quantization: 4bit
+    estimated_ram_gb: 350
+    estimated_speed_tok_per_sec: "15-18"
+    languages: 10
+    is_reasoning_model: false
+    requires_conversion: false
+    requires_offloading: true
+    offloading_note: "671B MoE — full weight set ~335GB. Needs SSD expert offloading via mlx_lm --num-layers or similar; cannot cold-load into 128GB RAM."
+    reasoning_siblings_to_avoid: ["deepseek-ai/DeepSeek-R1", "deepseek-ai/DeepSeek-R1-0528"]
+    role: MoE architecture with heavy Chinese-language pretraining
+
+  mixtral_8x7b:
+    name: Mixtral-8x7B-Instruct-v0.1
+    family: Mixtral
+    organization: Mistral AI (MoE)
+    hf_id: mistralai/Mixtral-8x7B-Instruct-v0.1
+    mlx_id: mlx-community/Mixtral-8x7B-Instruct-v0.1-4bit
+    parameters: 46.7B
+    quantization: 4bit
+    estimated_ram_gb: 26
+    estimated_speed_tok_per_sec: "18-22"
+    languages: 5
+    is_reasoning_model: false
+    requires_conversion: false
+    role: Sparse MoE — scientifically interesting for language routing analysis
+
+  command_r_plus:
+    name: Command R+
+    family: Command R
+    organization: Cohere
+    hf_id: CohereForAI/c4ai-command-r-plus
+    mlx_id: CohereForAI/c4ai-command-r-plus
+    parameters: 104B
+    quantization: 4bit
+    estimated_ram_gb: 21
+    estimated_speed_tok_per_sec: "18-22"
+    languages: 23
+    is_reasoning_model: false
+    requires_conversion: true
+    role: RAG-optimized multilingual model, distinct from Aya Expanse architecture
+
+  glm4_air:
+    name: GLM-4.5-Air
+    family: GLM-4
+    organization: Zhipu AI
+    hf_id: THUDM/GLM-4.5-Air
+    mlx_id: mlx-community/GLM-4.5-Air-4bit
+    parameters: 32B
+    quantization: 4bit
+    estimated_ram_gb: 16
+    estimated_speed_tok_per_sec: "24-28"
+    languages: 10
+    is_reasoning_model: false
+    requires_conversion: false
+    reasoning_siblings_to_avoid: ["THUDM/GLM-Z1-32B", "THUDM/GLM-Z1-Rumination-32B"]
+    role: Chinese-origin model with distinct GLM pretraining paradigm

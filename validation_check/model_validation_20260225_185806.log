@@ -1,0 +1,70 @@
+
+============================================================
+  Beyond-English — Model Validation Script
+============================================================
+  Config : /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/configs/models.yaml
+  Log    : /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/results/model_validation_20260225_185806.log
+  Mode   : SKIP LARGE (>40GB models skipped)
+Run at: 20260225_185806
+Config: /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/configs/models.yaml
+Models: ['qwen2_5_32b', 'aya_expanse_32b', 'llama3_1_70b', 'mistral_small_24b', 'gemma3_27b', 'phi4_14b', 'deepseek_v3', 'mixtral_8x7b', 'command_r_plus', 'glm4_air']
+dry_run=False, skip_large=True
+
+━━━ Step 1 — Reasoning Model Guard ━━━
+✅ Reasoning model guard passed — no reasoning models detected in config
+
+━━━ Step 2 — Metadata Validation ━━━
+  ✅ qwen2_5_32b: Qwen2.5-32B-Instruct
+  ✅ aya_expanse_32b: Aya Expanse 32B
+  ✅ llama3_1_70b: Meta-Llama-3.1-70B-Instruct
+  ✅ mistral_small_24b: Mistral-Small-24B-Instruct-2501
+  ✅ gemma3_27b: Gemma-3-27B-Instruct
+  ✅ phi4_14b: Phi-4
+  ✅ deepseek_v3: DeepSeek-V3
+  ✅ mixtral_8x7b: Mixtral-8x7B-Instruct-v0.1
+  ✅ command_r_plus: Command R+
+  ✅ glm4_air: GLM-4.5-Air
+
+━━━ Step 3 — MLX Load Test ━━━
+  Loading Qwen2.5-32B-Instruct (mlx-community/Qwen2.5-32B-Instruct-4bit) …
+HTTP Request: GET https://huggingface.co/api/models/mlx-community/Qwen2.5-32B-Instruct-4bit/revision/main "HTTP/1.1 200 OK"
+  ✅ Qwen2.5-32B-Instruct — loaded successfully (20GB, ~20-23 tok/s)
+LOADED: Qwen2.5-32B-Instruct (20GB, ~20-23 tok/s)
+
+━━━ Step 4 — Tokenizer Sanity: Qwen2.5-32B-Instruct ━━━
+  ✅ Tokenizer OK — 'The quick brown fox' → 4 tokens
+TOKENIZER OK: Qwen2.5-32B-Instruct (4 tokens for probe)
+    (memory released after Qwen2.5-32B-Instruct)
+  ⏭️  Aya Expanse 32B — skipped (requires mlx_lm.convert first)
+SKIPPED (conversion): Aya Expanse 32B
+  ⏭️  Meta-Llama-3.1-70B-Instruct — skipped (--skip-large: 42GB > 40GB)
+SKIPPED (large): Meta-Llama-3.1-70B-Instruct (42GB)
+  Loading Mistral-Small-24B-Instruct-2501 (mlx-community/Mistral-Small-24B-Instruct-2501-4bit) …
+HTTP Request: GET https://huggingface.co/api/models/mlx-community/Mistral-Small-24B-Instruct-2501-4bit/revision/main "HTTP/1.1 200 OK"
+  ✅ Mistral-Small-24B-Instruct-2501 — loaded successfully (14GB, ~28-32 tok/s)
+LOADED: Mistral-Small-24B-Instruct-2501 (14GB, ~28-32 tok/s)
+
+━━━ Step 4 — Tokenizer Sanity: Mistral-Small-24B-Instruct-2501 ━━━
+  ✅ Tokenizer OK — 'The quick brown fox' → 5 tokens
+TOKENIZER OK: Mistral-Small-24B-Instruct-2501 (5 tokens for probe)
+    (memory released after Mistral-Small-24B-Instruct-2501)
+  Loading Gemma-3-27B-Instruct (mlx-community/gemma-3-27b-it-4bit) …
+HTTP Request: GET https://huggingface.co/api/models/mlx-community/gemma-3-27b-it-4bit/revision/main "HTTP/1.1 200 OK"
+  ✅ Gemma-3-27B-Instruct — loaded successfully (17GB, ~22-25 tok/s)
+LOADED: Gemma-3-27B-Instruct (17GB, ~22-25 tok/s)
+
+━━━ Step 4 — Tokenizer Sanity: Gemma-3-27B-Instruct ━━━
+  ✅ Tokenizer OK — 'The quick brown fox' → 5 tokens
+TOKENIZER OK: Gemma-3-27B-Instruct (5 tokens for probe)
+    (memory released after Gemma-3-27B-Instruct)
+  Loading Phi-4 (mlx-community/phi-4-4bit) …
+HTTP Request: GET https://huggingface.co/api/models/mlx-community/phi-4-4bit/revision/main "HTTP/1.1 200 OK"
+  ✅ Phi-4 — loaded successfully (8GB, ~38-42 tok/s)
+LOADED: Phi-4 (8GB, ~38-42 tok/s)
+
+━━━ Step 4 — Tokenizer Sanity: Phi-4 ━━━
+  ✅ Tokenizer OK — 'The quick brown fox' → 4 tokens
+TOKENIZER OK: Phi-4 (4 tokens for probe)
+    (memory released after Phi-4)
+  Loading DeepSeek-V3 (mlx-community/DeepSeek-V3-4bit) …
+HTTP Request: GET https://huggingface.co/api/models/mlx-community/DeepSeek-V3-4bit/revision/main "HTTP/1.1 200 OK"

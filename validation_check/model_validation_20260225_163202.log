@@ -1,0 +1,59 @@
+
+============================================================
+  Beyond-English — Model Validation Script
+============================================================
+  Config : /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/configs/models.yaml
+  Log    : /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/results/model_validation_20260225_163202.log
+  Mode   : DRY RUN (Steps 1–2 only)
+Run at: 20260225_163202
+Config: /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/configs/models.yaml
+Models: ['qwen2_5_32b', 'aya_expanse_32b', 'llama3_1_70b', 'mistral_small_24b', 'gemma3_27b', 'phi4_14b', 'deepseek_v3', 'mixtral_8x7b', 'command_r_plus', 'glm4_air']
+dry_run=True, skip_large=False
+
+━━━ Step 1 — Reasoning Model Guard ━━━
+✅ Reasoning model guard passed — no reasoning models detected in config
+
+━━━ Step 2 — Metadata Validation ━━━
+  ✅ qwen2_5_32b: Qwen2.5-32B-Instruct
+  ✅ aya_expanse_32b: Aya Expanse 32B
+  ✅ llama3_1_70b: Meta-Llama-3.1-70B-Instruct
+  ✅ mistral_small_24b: Mistral-Small-24B-Instruct-2501
+  ✅ gemma3_27b: Gemma-3-27B-Instruct
+  ✅ phi4_14b: Phi-4
+  ✅ deepseek_v3: DeepSeek-V3
+  ✅ mixtral_8x7b: Mixtral-8x7B-Instruct-v0.1
+  ✅ command_r_plus: Command R+
+  ✅ glm4_air: GLM-4.5-Air
+
+━━━ Step 3 — MLX Load Test ━━━
+  --dry-run active: skipping all model loads
+
+━━━ Step 5 — Memory Report ━━━
+
+MEMORY REPORT:
+  Qwen2.5-32B-Instruct: 20GB  skipped
+  Aya Expanse 32B: 20GB  skipped
+  Meta-Llama-3.1-70B-Instruct: 42GB  skipped [LARGE >40GB]
+  Mistral-Small-24B-Instruct-2501: 14GB  skipped
+  Gemma-3-27B-Instruct: 17GB  skipped
+  Phi-4: 8GB  skipped
+  DeepSeek-V3: 35GB  skipped
+  Mixtral-8x7B-Instruct-v0.1: 26GB  skipped
+  Command R+: 21GB  skipped
+  GLM-4.5-Air: 16GB  skipped
+
+━━━ Step 6 — Final Summary ━━━
+  Total models in config          : 10
+  Total models in config          : 10
+  Reasoning model guard           : PASSED
+  Reasoning model guard           : PASSED
+  Models loaded successfully      : 0
+  Models loaded successfully      : 0
+  Models skipped (need conversion): 10
+  Models skipped (need conversion): 10
+  Models failed                   : 0
+  Models failed                   : 0
+  Total estimated RAM (all models): 219 GB ⚠️  exceeds 128GB!
+  Total estimated RAM (all models): 219 GB ⚠️  exceeds 128GB!
+
+Full log written to: /Users/dhiwahar_k/Desktop/dhiwahar_k/Dhiwahar K Adhithya/Github/Beyond-English-Multilingual-Self-Consistency-for-Robust-LLM-Reasoning/results/model_validation_20260225_163202.log
