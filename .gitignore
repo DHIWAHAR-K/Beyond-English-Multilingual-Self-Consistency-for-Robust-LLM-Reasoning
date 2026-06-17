@@ -1,0 +1,12 @@
+# Specific exclusions requested by user
+docs/plans/
+Research Proposal.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# OS
+.DS_Store
