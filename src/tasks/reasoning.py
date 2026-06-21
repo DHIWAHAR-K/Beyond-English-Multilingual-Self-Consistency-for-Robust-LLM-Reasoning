@@ -91,7 +91,9 @@ class ReasoningTask(BaseTask):
 
         for language in CLC_LANGUAGES:
             config = f"{language}"
-            dataset = load_dataset("juletxara/mgsm", config, split="test", cache_dir=str(self.cache_dir))
+            dataset = load_dataset(
+                "juletxara/mgsm", config, split="test", cache_dir=str(self.cache_dir)
+            )
             for item in dataset:
                 rows.append(
                     {

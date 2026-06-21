@@ -176,7 +176,5 @@ def metadata_conclusion_for_latency(ttft_values: List[float], decode_means: List
             "suggesting a prefill latency cliff."
         )
     if decode_growth > 1.5:
-        return (
-            f"Decode latency grows {decode_growth:.1f}x, indicating decode-stage pressure."
-        )
+        return f"Decode latency grows {decode_growth:.1f}x, indicating decode-stage pressure."
     return "Latency scales relatively smoothly across tested prompt lengths."

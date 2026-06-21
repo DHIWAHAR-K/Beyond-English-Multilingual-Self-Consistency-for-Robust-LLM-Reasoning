@@ -18,7 +18,9 @@ class MLXRunner(BaseModelRunner):
         self.tokenizer = None
         self.config = None
 
-    def load_model(self, model_id: str, precision: str, quantization_path: Optional[str] = None) -> None:
+    def load_model(
+        self, model_id: str, precision: str, quantization_path: Optional[str] = None
+    ) -> None:
         """Loads model weights into memory under specified precision & quantization.
 
         If quantization_path is provided, it loads the model from that path.
@@ -35,9 +37,7 @@ class MLXRunner(BaseModelRunner):
         path_to_load = quantization_path if quantization_path else model_id
 
         # Load the model, tokenizer, and config using mlx_lm
-        self.model, self.tokenizer, self.config = mlx_lm.load(
-            path_to_load, return_config=True
-        )
+        self.model, self.tokenizer, self.config = mlx_lm.load(path_to_load, return_config=True)
 
         # Apply in-memory quantization if quantization_path was not used and precision is quantized
         if not quantization_path:
@@ -50,7 +50,9 @@ class MLXRunner(BaseModelRunner):
                 mx.eval(self.model.parameters())
                 mx.clear_cache()
 
-    def generate(self, prompt: str, max_tokens: int = 512, temperature: float = 0.0, top_p: float = 1.0) -> Dict[str, Any]:
+    def generate(
+        self, prompt: str, max_tokens: int = 512, temperature: float = 0.0, top_p: float = 1.0
+    ) -> Dict[str, Any]:
         """Generates text and tracks per-token latency and TTFT.
 
         Returns a dictionary containing:
@@ -116,9 +118,7 @@ class MLXRunner(BaseModelRunner):
         )
 
         prompt_ids = self.tokenizer.encode(prompt, add_special_tokens=add_special_tokens)
-        full_ids = self.tokenizer.encode(
-            prompt + completion, add_special_tokens=add_special_tokens
-        )
+        full_ids = self.tokenizer.encode(prompt + completion, add_special_tokens=add_special_tokens)
 
         prompt_len = len(prompt_ids)
         if prompt_len >= len(full_ids):

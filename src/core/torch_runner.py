@@ -16,7 +16,9 @@ class TorchMPSRunner(BaseModelRunner):
         self.model = None
         self.tokenizer = None
 
-    def load_model(self, model_id: str, precision: str, quantization_path: Optional[str] = None) -> None:
+    def load_model(
+        self, model_id: str, precision: str, quantization_path: Optional[str] = None
+    ) -> None:
         """Loads model weights into memory under specified precision & quantization.
 
         If quantization_path is provided, it loads the model from that path.
@@ -49,9 +51,9 @@ class TorchMPSRunner(BaseModelRunner):
 
         # Load tokenizer and model
         self.tokenizer = AutoTokenizer.from_pretrained(path_to_load)
-        
+
         device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-        
+
         # Load model with correct device placement
         # For pre-quantized models (e.g. GPTQ/AWQ), we rely on device_map="auto" to map to MPS
         if quantization_path:
@@ -69,7 +71,9 @@ class TorchMPSRunner(BaseModelRunner):
 
         self.model.eval()
 
-    def generate(self, prompt: str, max_tokens: int = 512, temperature: float = 0.0, top_p: float = 1.0) -> Dict[str, Any]:
+    def generate(
+        self, prompt: str, max_tokens: int = 512, temperature: float = 0.0, top_p: float = 1.0
+    ) -> Dict[str, Any]:
         """Generates text and tracks per-token latency and TTFT.
 
         Returns a dictionary containing:
@@ -125,11 +129,15 @@ class TorchMPSRunner(BaseModelRunner):
                     logits = logits / temperature
                     if top_p < 1.0:
                         sorted_logits, sorted_indices = torch.sort(logits, descending=True, dim=-1)
-                        cumulative_probs = torch.cumsum(torch.softmax(sorted_logits, dim=-1), dim=-1)
+                        cumulative_probs = torch.cumsum(
+                            torch.softmax(sorted_logits, dim=-1), dim=-1
+                        )
 
                         # Shift to keep first token above top_p
                         sorted_indices_to_remove = cumulative_probs > top_p
-                        sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
+                        sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[
+                            ..., :-1
+                        ].clone()
                         sorted_indices_to_remove[..., 0] = 0
 
                         for idx in range(logits.size(0)):

@@ -13,12 +13,16 @@ def mock_mlx_stream():
         def __init__(self, text):
             self.text = text
 
-    with patch("src.core.mlx_runner.mlx_lm.load") as mock_load, patch(
-        "src.core.mlx_runner.mlx_lm.stream_generate"
-    ) as mock_stream, patch("src.core.mlx_runner.mx") as mock_mx:
+    with (
+        patch("src.core.mlx_runner.mlx_lm.load") as mock_load,
+        patch("src.core.mlx_runner.mlx_lm.stream_generate") as mock_stream,
+        patch("src.core.mlx_runner.mx") as mock_mx,
+    ):
         mock_tokenizer = MagicMock()
         mock_tokenizer.bos_token = None
-        mock_tokenizer.encode.side_effect = lambda text, add_special_tokens=True: list(range(len(text)))
+        mock_tokenizer.encode.side_effect = lambda text, add_special_tokens=True: list(
+            range(len(text))
+        )
         mock_tokenizer.decode.return_value = "hello"
 
         mock_model = MagicMock()
@@ -76,14 +80,18 @@ def test_torch_runner_generate_schema(mock_tokenizer_cls, mock_model_cls):
     mock_model.return_value = mock_outputs
     mock_model_cls.from_pretrained.return_value = mock_model
 
-    with patch("torch.backends.mps.is_available", return_value=False), patch(
-        "torch.argmax", return_value=MagicMock(item=lambda: 5, keepdim=lambda **_: MagicMock())
-    ), patch("torch.multinomial", return_value=MagicMock(item=lambda: 5, keepdim=lambda **_: MagicMock())), patch(
-        "torch.softmax", return_value=MagicMock()
-    ), patch(
-        "torch.tensor", return_value=MagicMock(to=lambda _: MagicMock())
-    ), patch(
-        "torch.no_grad", return_value=MagicMock()
+    with (
+        patch("torch.backends.mps.is_available", return_value=False),
+        patch(
+            "torch.argmax", return_value=MagicMock(item=lambda: 5, keepdim=lambda **_: MagicMock())
+        ),
+        patch(
+            "torch.multinomial",
+            return_value=MagicMock(item=lambda: 5, keepdim=lambda **_: MagicMock()),
+        ),
+        patch("torch.softmax", return_value=MagicMock()),
+        patch("torch.tensor", return_value=MagicMock(to=lambda _: MagicMock())),
+        patch("torch.no_grad", return_value=MagicMock()),
     ):
         runner = TorchMPSRunner()
         runner.load_model("test-model", "fp16")

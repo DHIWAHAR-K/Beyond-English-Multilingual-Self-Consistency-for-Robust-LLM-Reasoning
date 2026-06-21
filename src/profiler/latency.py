@@ -92,7 +92,12 @@ def get_dummy_prompt(tokenizer, target_len: int) -> str:
     return tokenizer.decode([token_id] * target_len)
 
 
-def profile_latency(runner, model_id: str, prompt_lengths: List[int] = [128, 256, 512, 1024, 2048, 4096], decode_budget: int = 64) -> Dict[int, Dict[str, Any]]:
+def profile_latency(
+    runner,
+    model_id: str,
+    prompt_lengths: List[int] = [128, 256, 512, 1024, 2048, 4096],
+    decode_budget: int = 64,
+) -> Dict[int, Dict[str, Any]]:
     """Runs latency and memory profiling on the loaded model runner.
 
     Evaluates TTFT, decode latency per token, and peak UMA memory usage.
@@ -105,9 +110,7 @@ def profile_latency(runner, model_id: str, prompt_lengths: List[int] = [128, 256
         tokenizer = getattr(runner, "tokenizer", None)
 
     if tokenizer is None:
-        raise ValueError(
-            f"Could not initialize tokenizer for model_id: {model_id}"
-        )
+        raise ValueError(f"Could not initialize tokenizer for model_id: {model_id}")
 
     # Clean cache and run warm-up to initialize kernels and caching graph
     gc.collect()

@@ -38,7 +38,9 @@ class ParityTask(BaseTask):
         super().__init__(runner, output_dir, model_slug, precision)
         self.cache_dir = Path(cache_dir)
 
-    def _load_samples(self, dataset_name: str, split: str, max_samples: int) -> List[Dict[str, str]]:
+    def _load_samples(
+        self, dataset_name: str, split: str, max_samples: int
+    ) -> List[Dict[str, str]]:
         from datasets import load_dataset
 
         self.cache_dir.mkdir(parents=True, exist_ok=True)

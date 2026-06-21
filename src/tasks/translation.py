@@ -31,7 +31,10 @@ def compute_chrf(hypotheses: List[str], references: List[str]) -> float:
 
 def compute_comet(hypotheses: List[str], references: List[str], sources: List[str]) -> float:
     model = load_comet_model()
-    data = [{"src": src, "mt": hyp, "ref": ref} for src, hyp, ref in zip(sources, hypotheses, references)]
+    data = [
+        {"src": src, "mt": hyp, "ref": ref}
+        for src, hyp, ref in zip(sources, hypotheses, references)
+    ]
     output = model.predict(data, batch_size=8, gpus=0)
     return float(output.system_score)
 
@@ -65,7 +68,7 @@ def calibrate_model(
         awq_model.quantize(tokenizer, quant_config={"zero_point": True, "q_group_size": 128})
         output_path = f"results/translation/calibrated/{lang}/awq"
     elif method == "gptq":
-        from auto_gptq import BaseQuantizeConfig, AutoGPTQForCausalLM
+        from auto_gptq import AutoGPTQForCausalLM, BaseQuantizeConfig
 
         quant_config = BaseQuantizeConfig(bits=4, group_size=128)
         gptq_model = AutoGPTQForCausalLM.from_pretrained(model_id, quantize_config=quant_config)
@@ -155,7 +158,8 @@ class TranslationTask(BaseTask):
 
         chrf_score = compute_chrf(hypotheses, references)
         per_sample_chrf = [
-            float(sacrebleu.sentence_chrf(hyp, [ref]).score) for hyp, ref in zip(hypotheses, references)
+            float(sacrebleu.sentence_chrf(hyp, [ref]).score)
+            for hyp, ref in zip(hypotheses, references)
         ]
         bootstrap = bootstrap_ci(per_sample_chrf)
 

@@ -18,7 +18,9 @@ class MLCRunner(BaseModelRunner):
         self.engine = None
         self.model_id = None
 
-    def load_model(self, model_id: str, precision: str, quantization_path: Optional[str] = None) -> None:
+    def load_model(
+        self, model_id: str, precision: str, quantization_path: Optional[str] = None
+    ) -> None:
         """Loads model weights into memory under specified precision & quantization
 
         using MLCEngine.
@@ -43,7 +45,9 @@ class MLCRunner(BaseModelRunner):
         # Initialize MLCEngine targeting Metal (default on macOS Apple Silicon)
         self.engine = MLCEngine(self.model_id, device="metal")
 
-    def generate(self, prompt: str, max_tokens: int = 512, temperature: float = 0.0, top_p: float = 1.0) -> Dict[str, Any]:
+    def generate(
+        self, prompt: str, max_tokens: int = 512, temperature: float = 0.0, top_p: float = 1.0
+    ) -> Dict[str, Any]:
         """Generates text using the MLCEngine and profiles per-token latencies.
 
         Returns a dictionary containing:
