@@ -7,7 +7,7 @@ dependencies = [
     "mlx>=0.14.1",
     "mlx-lm",
     "pandas>=2.2.2",
-    "numpy>=2.2.0",
+    "numpy>=1.26.0",
     "matplotlib>=3.10",
     "seaborn>=0.12.0",
     "scipy>=1.14.0",
@@ -22,11 +22,16 @@ dependencies = [
     "sacrebleu>=2.4.0",
     "evaluate>=0.4.0",
     "pyyaml>=6.0.0",
+]
+
+[project.optional-dependencies]
+comet = ["unbabel-comet>=2.2.0"]
+calibration = ["auto-round", "autoawq", "auto-gptq"]
+full = [
     "unbabel-comet>=2.2.0",
     "auto-round",
     "autoawq",
     "auto-gptq",
-    "mlc-llm; sys_platform == 'darwin'",
 ]
 
 [dependency-groups]
@@ -50,7 +55,7 @@ target-version = ['py310']
 
 [tool.isort]
 profile = "black"
-line-length = 100
+line_length = 100
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
