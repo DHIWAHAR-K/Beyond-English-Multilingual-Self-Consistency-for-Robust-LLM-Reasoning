@@ -12,8 +12,9 @@ __pycache__/
 .DS_Store
 
 # Experiment outputs (keep directory structure)
-results/*
+results/**/*
 !results/.gitkeep
+!results/**/
 !results/**/.gitkeep
 
 # Super-Human session board (local working state)
